@@ -1,0 +1,18 @@
+services:
+  benchy:
+    build: .
+    env_file: .env
+    environment:
+      DATA_DIR: /app/data
+      PORT: "3000"
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./data:/app/data
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    restart: unless-stopped

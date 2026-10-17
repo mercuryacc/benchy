@@ -1,0 +1,10 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import {Store, schedule, newSession, validateTemplate} from '../model.mjs';
+const fixture={id:'x',version:1,name:'Uneven',notes:'raw',blocks:[{id:'b',label:'D',type:'superset',restExercise:null,restRound:90,exercises:[{id:'e1',label:'D1',name:'Calf',sets:3,targets:{}},{id:'e2',label:'D2',name:'Curl',sets:2,targets:{}}]}]};
+test('uneven rounds never fabricate child sets; snapshot remains independent',()=>{const s=newSession(fixture,'UTC');assert.deepEqual(schedule(s).map(x=>x.label),['D1','D2','D1','D2','D1']);fixture.name='Edited';assert.equal(s.name,'Uneven');assert.equal(s.sets.length,5);assert.ok(s.sets.every(x=>x.actual.reps===null&&x.status==='pending'));});
+test('finite targets, zero load valid, malformed template rejected',()=>{assert.throws(()=>validateTemplate({...fixture,blocks:[{...fixture.blocks[0],exercises:[{...fixture.blocks[0].exercises[0],sets:-2}]}]}));assert.equal(validateTemplate({...fixture,blocks:[{...fixture.blocks[0],exercises:[{...fixture.blocks[0].exercises[0],targets:{load:0}}]}]}).blocks[0].exercises[0].targets.load,0);});
+test('serialized full transactions retain every acknowledged mutation; malformed state preserved',async()=>{const dir=await fs.mkdtemp(path.join(os.tmpdir(),'benchy-store-'));const file=path.join(dir,'state.json');const s=new Store(file,()=>({schemaVersion:1,templates:[],sessions:[],credentials:[],ops:{},revision:0}));await s.init();await Promise.all(Array.from({length:40},(_,i)=>s.mutate(d=>{d.sessions.push({id:String(i)});})));assert.equal((await s.read()).sessions.length,40);await fs.writeFile(file,'{bad');await assert.rejects(s.mutate(d=>{d.sessions=[];}));assert.equal(await fs.readFile(file,'utf8'),'{bad');await fs.rm(dir,{recursive:true});});
