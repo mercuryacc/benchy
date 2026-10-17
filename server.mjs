@@ -45,6 +45,7 @@ app.use('/assets',express.static('public',{index:false,dotfiles:'deny'}));
 app.use('/vendor',express.static('node_modules/@simplewebauthn/browser/esm',{index:false,dotfiles:'deny'}));
 app.get('/manifest.webmanifest',(req,res)=>res.json({name:'Benchy',short_name:'Benchy',start_url:'/',display:'standalone',background_color:'#111110',theme_color:'#111110',icons:[{src:'/assets/icon.svg',sizes:'any',type:'image/svg+xml',purpose:'any'}]}));
 app.get('/robots.txt',(req,res)=>res.type('text').send('User-agent: *\nDisallow: /\n'));
+app.get('/design',(req,res)=>res.sendFile(path.resolve('public/design.html')));
 app.get(['/','/setup'],async(req,res)=>{res.sendFile(path.resolve('public',await authenticated(req)?'app.html':'login.html'));});
 app.use('/api',requireAuth);
 app.get('/api/state',async(req,res)=>{const d=await store.read();res.json({revision:d.revision,templates:d.templates,sessions:d.sessions,sources:sources.map(({file,...s})=>s)});});

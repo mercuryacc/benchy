@@ -4,8 +4,8 @@
   "description": "Self-hosted, passkey-protected workout logging",
   "scripts": {
     "start": "node --env-file=.env server.mjs",
-    "test": "node --test tests/*.test.mjs && node tests/server-integrity.mjs && node tests/browser.mjs",
-    "check": "node --check server.mjs && node --check model.mjs && node --check public/app.js && node --check public/auth.js",
+    "test": "node --test tests/*.test.mjs && node tests/server-integrity.mjs && node tests/browser.mjs && node tests/design-browser.mjs",
+    "check": "node --check server.mjs && node --check model.mjs && node --check public/app.js && node --check public/auth.js && node --check public/design.v1.js",
     "setup": "node scripts/setup.mjs"
   },
   "keywords": [],

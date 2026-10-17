@@ -4,6 +4,9 @@
 !server.mjs
 !model.mjs
 !public/
+!public/design.html
+!public/design.v1.css
+!public/design.v1.js
 !public/app.html
 !public/login.html
 !public/app.js
