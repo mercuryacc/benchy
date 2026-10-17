@@ -1,0 +1,47 @@
+/* Compact exercise stacks. Load after Voltage; inherit all theme/contrast tokens. */
+details.block { border-color: var(--line); margin: 16px 0 22px; padding: 0 12px 12px; }
+details.block > summary { margin: 0 -12px; padding: 14px 44px 14px 12px; min-height: 84px; }
+[data-block-progress] { font-weight: 650; }
+.block .exercise { padding: 8px 0 0; min-width: 0; }
+.block .exercise + .exercise { margin-top: 18px; }
+.block .exercise-title { margin-bottom: 2px; }
+.block .exercise-title h3 { font-size: 17px; }
+.block .target, .group-guidance { font-size: 13px; color: var(--muted); margin: 4px 0 10px; }
+.set-stack { border-top: 1px solid var(--line); }
+.set-stack > article.set { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; margin: 0; padding: 6px 0; background: transparent; min-width: 0; }
+.set-line { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 6px; align-items: center; min-height: 72px; }
+.set-line > * { min-width: 0; }
+.set-line .set-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0; }
+.set-line .set-fields label { display: grid; gap: 2px; font-size: 11px; line-height: 1.2; color: var(--muted); min-width: 0; }
+.set .measure-control { display: flex; min-width: 0; gap: 2px; }
+.set .measure-control input { flex: 1 1 0; min-width: 0; width: 0; padding: 6px 3px; }
+.set-stack .set .set-fields .measure-control select { flex: 0 0 46px; width: 46px; min-height: 44px; font-size: 16px; padding: 4px 0; margin-top: 0; }
+.set-stack .set .set-fields input { margin-top: 0; }
+.set-stack > article.set.skipped { opacity: 1; }
+.set-stack > article.set.skipped .set-number { color: var(--muted); }
+.set :is(input, select) { min-height: 44px; font-size: 16px; }
+.set-line .set-number, .set-line .set-check { width: 44px; min-width: 44px; min-height: 44px; padding: 3px; }
+.set-number { display: grid; align-content: center; gap: 0; background: transparent; border-color: transparent; line-height: 1.2; }
+.set-number small { font-size: 10px; font-weight: 400; }
+.set-line .set-check { font-size: 23px; background: transparent; border-color: var(--line); color: var(--text); }
+.set-line .set-check[aria-checked=true] { background: var(--accent); color: var(--ink); border-color: var(--accent); }
+.set .extra-metrics { margin: 0; }
+.set .extra-metrics > summary { display: none; }
+.set .extra-metrics[open] { padding: 8px 0; }
+.set .extra-metrics .set-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.set .extra-metrics .set-fields label { min-width: 0; }
+.set .extra-metrics .set-head { margin-bottom: 8px; font-size: 12px; }
+.set .extra-metrics .set-actions { display: flex; gap: 8px; margin: 8px 0 0; }
+.set .last { margin: 0 0 4px 50px; font-size: 11px; color: var(--muted); }
+.exercise > .add-set { margin-top: 6px; min-height: 44px; padding: 6px 10px; }
+.exercise-tools { margin: 0; color: var(--muted); font-size: 13px; }
+.exercise-tools > summary { min-height: 44px; padding: 10px 0; }
+.exercise-tools .row { padding-bottom: 8px; }
+.set button:focus-visible, .exercise-tools summary:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.set-line .set-check[aria-checked=true]:focus-visible { outline-color: var(--signal); }
+@media (max-width: 380px) {
+  details.block { padding-left: 8px; padding-right: 8px; }
+  details.block > summary { margin-left: -8px; margin-right: -8px; padding-left: 8px; }
+  .set-line { gap: 4px; }
+  .set-line .set-fields { gap: 4px; }
+}

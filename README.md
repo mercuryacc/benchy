@@ -5,6 +5,8 @@ A small self-hosted workout notebook, protected by a passkey. Create your own wo
 ## Features
 
 - Voltage visual theme: acid-green exercise headers, high-contrast logging and square controls, with dark/light/system appearance.
+- Compact per-exercise set stacks, right-side checkboxes and independent add-set controls. A block completes only when every set is checked and saved; undoing or adding a set reopens it.
+- New sessions pre-fill each pending set from the latest finished session containing that exercise, retaining its ordered reps/load/distance/duration and units—not completion, RPE or notes. Existing edits are never refilled on reload; unknowns stay blank. Current prescribed set counts remain intact, and additional sets can recall their matching historical ordinal.
 - Mobile-friendly workout editor with single exercises, supersets, and circuits.
 - Per-set reps, load (including zero), distance, duration, effort, and notes.
 - Uneven exercise rounds without invented sets; independent historical snapshots.
