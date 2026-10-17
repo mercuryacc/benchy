@@ -43,7 +43,7 @@ app.post('/auth/login/verify',authLimit,async(req,res)=>{const p=consume(req,res
 app.post('/auth/logout',(req,res)=>{res.clearCookie('benchy_session',cookieOptions);res.json({ok:true});});
 app.use('/assets',express.static('public',{index:false,dotfiles:'deny'}));
 app.use('/vendor',express.static('node_modules/@simplewebauthn/browser/esm',{index:false,dotfiles:'deny'}));
-app.get('/manifest.webmanifest',(req,res)=>res.json({name:'Benchy',short_name:'Benchy',start_url:'/',display:'standalone',background_color:'#111110',theme_color:'#111110',icons:[{src:'/assets/icon.svg',sizes:'any',type:'image/svg+xml',purpose:'any'}]}));
+app.get('/manifest.webmanifest',(req,res)=>res.json({name:'Benchy',short_name:'Benchy',start_url:'/',display:'standalone',background_color:'#11140e',theme_color:'#11140e',icons:[{src:'/assets/icon.svg',sizes:'any',type:'image/svg+xml',purpose:'any'}]}));
 app.get('/robots.txt',(req,res)=>res.type('text').send('User-agent: *\nDisallow: /\n'));
 app.get('/design',(req,res)=>res.sendFile(path.resolve('public/design.html')));
 app.get(['/','/setup'],async(req,res)=>{res.sendFile(path.resolve('public',await authenticated(req)?'app.html':'login.html'));});

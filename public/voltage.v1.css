@@ -1,0 +1,229 @@
+/* Voltage: real Benchy DOM skin. Load after style.v1.css and compact.v1.css.
+   Acid is a filled-surface token; signal is the readable text/focus token. */
+:root,
+:root[data-theme=dark],
+:root[data-theme=auto] {
+  color-scheme: dark;
+  --bg: #11140e;
+  --panel: #1b2115;
+  --input: #10140d;
+  --text: #f3f7e9;
+  --muted: #b3bda5;
+  --line: #536044;
+  --accent: #d6ff49;
+  --ink: #1a2109;
+  --signal: #d6ff49;
+  --danger: #ffb5a7;
+}
+:root[data-theme=light] {
+  color-scheme: light;
+  --bg: #f3f5e9;
+  --panel: #ffffff;
+  --input: #f8faef;
+  --text: #1a2109;
+  --muted: #505c40;
+  --line: #758361;
+  --accent: #d6ff49;
+  --ink: #1a2109;
+  --signal: #3c5711;
+  --danger: #a02d20;
+}
+@media (prefers-color-scheme: light) {
+  :root[data-theme=auto] {
+    color-scheme: light;
+    --bg: #f3f5e9;
+    --panel: #ffffff;
+    --input: #f8faef;
+    --text: #1a2109;
+    --muted: #505c40;
+    --line: #758361;
+    --accent: #d6ff49;
+    --ink: #1a2109;
+    --signal: #3c5711;
+    --danger: #a02d20;
+  }
+}
+body { background: var(--bg); color: var(--text); }
+header { padding-top: 22px; padding-bottom: 14px; }
+.wordmark { font-weight: 900; letter-spacing: -1.5px; }
+a.wordmark { display: inline-flex; align-items: center; min-height: 44px; }
+.wordmark span, .done, .round > .eyebrow { color: var(--signal); }
+h1, h2, h3 { overflow-wrap: anywhere; font-weight: 900; }
+h1, h2 { text-transform: uppercase; letter-spacing: -.8px; }
+h1 { font-size: clamp(30px, 5vw, 42px); line-height: 1.08; }
+h2 { line-height: 1.15; }
+h3 { line-height: 1.3; }
+.eyebrow { font-weight: 750; letter-spacing: 1.2px; }
+button, input, textarea, select, .list-button {
+  border: 2px solid var(--line);
+  border-radius: 0;
+  min-height: 48px;
+}
+button { font-weight: 800; max-width: 100%; overflow-wrap: anywhere; }
+input, textarea, select {
+  background: var(--input);
+  color: var(--text);
+  font-size: 16px;
+}
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: 1; }
+/* Labels are muted metadata; their actual editable values are never muted. */
+label input, label textarea, label select,
+.set-fields input, .set-fields select, .set details textarea,
+label.field input, label.field textarea, label.field select { color: var(--text); }
+.set-fields .measure-control select { font-size: 16px; }
+.primary {
+  background: var(--accent);
+  color: var(--ink);
+  border-color: var(--accent);
+  font-weight: 800;
+  --signal: var(--ink);
+}
+.primary :is(small, .eyebrow, .label, strong) { color: var(--ink); }
+.primary:focus-visible { outline: 2px solid var(--ink); outline-offset: -5px; }
+main a, #sheet-content a { min-height: 44px; display: inline-flex; align-items: center; }
+#sheet-content a.list-button { display: flex; }
+button:focus-visible, a:focus-visible, summary:focus-visible,
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+.tiny, .last button, #sync button, .close,
+#timer button, details.extra-metrics > summary {
+  min-height: 44px;
+  min-width: 44px;
+}
+summary { min-height: 44px; padding: 11px 0; cursor: pointer; overflow-wrap: anywhere; }
+summary:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+.row > *, .stack > *, .set-head > *, .last > *,
+.exercise-title > *, .list-button > *, .grid2 > *, .grid3 > * { min-width: 0; }
+.row > button.tiny { min-width: 44px; }
+.card, .card:first-child {
+  background: var(--panel);
+  border: 2px solid var(--line);
+  padding: 20px;
+  margin: 14px 0;
+}
+.card h3 { font-size: 20px; }
+.card .list-button { background: transparent; padding: 0; border: 0; }
+.list-button { gap: 12px; text-decoration: none; overflow-wrap: anywhere; }
+.list-button > span:first-child { flex: 1; }
+.list-button small { font-weight: 400; }
+#view > .row.spread { border-top: 3px solid var(--signal); padding-top: 14px; margin-top: 24px; }
+/* The summary is the actual grouped exercise header, not the nested round title.
+   The cut is painted on an inert pseudo-element, never clipped on the control. */
+details.block {
+  position: relative;
+  border: 2px solid var(--accent);
+  background: var(--panel);
+  margin: 22px 0 30px;
+  padding: 0 18px 18px;
+}
+details.block:not([open]) { padding-bottom: 0; }
+details.block > summary {
+  display: grid;
+  gap: 6px;
+  position: relative;
+  margin: 0 -18px;
+  padding: 20px 50px 20px 18px;
+  min-height: 96px;
+  background: var(--accent);
+  color: var(--ink);
+  --signal: var(--ink);
+}
+details.block > summary::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(45deg, transparent 49%, var(--bg) 50%);
+  pointer-events: none;
+}
+details.block > summary::after {
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink);
+  font-weight: 900;
+}
+details.block > summary :is(.eyebrow, strong, small, .label) { color: var(--ink); }
+details.block > summary strong { font-size: 21px; line-height: 1.25; font-weight: 900; }
+details.block > summary .eyebrow { font-weight: 800; }
+details.block > summary:focus-visible { outline-color: var(--ink); outline-offset: -5px; }
+details.block .block-title { margin: 14px 0 0; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.exercise-title { flex-wrap: wrap; gap: 4px 10px; }
+.exercise-title h3 { flex: 1 1 160px; }
+.exercise-title .label { color: var(--signal); font-weight: 800; overflow-wrap: anywhere; }
+.round { padding-top: 18px; }
+.set { margin-top: 12px; padding: 14px 0; }
+.set.complete { border-left-color: var(--signal); }
+.set-head { gap: 8px; align-items: flex-start; flex-wrap: wrap; }
+.set-head > span { overflow-wrap: anywhere; }
+.set-state { color: var(--muted); }
+.set.complete .set-state { color: var(--signal); font-weight: 750; }
+.last { flex-wrap: wrap; }
+.last > span { flex: 1 1 140px; overflow-wrap: anywhere; }
+.set-actions { flex-wrap: wrap; }
+details.extra-metrics > summary { display: flex; align-items: center; padding: 10px 0; }
+details.card > summary { font-weight: 750; }
+nav { border-top: 2px solid var(--line); padding-top: 10px; gap: 8px; }
+nav button { border: 2px solid transparent; border-radius: 0; font-weight: 750; min-width: 0; }
+nav button.selected {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink);
+  font-weight: 900;
+  --signal: var(--ink);
+}
+nav button.selected:focus-visible { outline-color: var(--ink); outline-offset: -5px; }
+#timer {
+  background: var(--accent);
+  color: var(--ink);
+  border: 2px solid var(--accent);
+  border-radius: 0;
+  box-shadow: 0 6px 0 #0003;
+  padding: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+  --signal: var(--ink);
+}
+#timer strong { font-size: 34px; font-weight: 900; letter-spacing: -1px; line-height: 1.15; }
+#timer .row { gap: 6px; }
+#timer button { color: var(--ink); border: 2px solid var(--ink); background: transparent; padding: 6px 9px; }
+#timer :focus-visible { outline-color: var(--ink); }
+body:has(#timer:not([hidden])) main { padding-bottom: 180px; }
+dialog {
+  border: 2px solid var(--signal);
+  border-radius: 0;
+  background: var(--bg);
+  padding: 24px;
+}
+dialog::backdrop { background: #080c06cc; }
+dialog h2 { padding-right: 38px; }
+.close { border: 2px solid var(--line); margin: -8px -8px 8px 8px; }
+.editor-block { background: var(--panel); border: 2px solid var(--line); border-radius: 0; padding: 14px; }
+.editor-block > .row:first-child { border-bottom: 3px solid var(--signal); padding-bottom: 12px; }
+.editor-block > .row > strong { text-transform: uppercase; font-weight: 900; }
+.editor-exercise { border-top: 2px solid var(--line); }
+.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.notice { border-left: 3px solid var(--signal); }
+.error { color: var(--danger); }
+.login main { border-top: 4px solid var(--signal); padding-top: 28px; }
+.login .wordmark { margin-bottom: 44px; }
+.login h1 { font-size: clamp(36px, 10vw, 44px); }
+@media (max-width: 440px) {
+  details.block { padding-left: 12px; padding-right: 12px; }
+  details.block > summary { margin-left: -12px; margin-right: -12px; padding-left: 14px; }
+  details.block > summary strong { font-size: 19px; }
+  .card, .card:first-child { padding: 16px; }
+  .set-fields { gap: 8px; }
+  .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  dialog { padding: 18px; }
+  .editor-block { padding: 12px; }
+  .editor-block .grid2 { grid-template-columns: minmax(0, 1fr); }
+  nav { padding-left: 12px; padding-right: 12px; }
+  nav button { padding-left: 8px; padding-right: 8px; font-size: 14px; }
+  #timer { left: 8px; right: 8px; }
+}

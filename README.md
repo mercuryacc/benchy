@@ -4,6 +4,7 @@ A small self-hosted workout notebook, protected by a passkey. Create your own wo
 
 ## Features
 
+- Voltage visual theme: acid-green exercise headers, high-contrast logging and square controls, with dark/light/system appearance.
 - Mobile-friendly workout editor with single exercises, supersets, and circuits.
 - Per-set reps, load (including zero), distance, duration, effort, and notes.
 - Uneven exercise rounds without invented sets; independent historical snapshots.
