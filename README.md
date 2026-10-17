@@ -66,7 +66,7 @@ Browser local storage holds pending changes and a cached view. Use a trusted dev
 
 ## Style playground
 
-Visit `/design` for a standalone component lab with five styles selected from the dropdown at the top. The lab uses synthetic examples only and is publicly viewable; no personal records or account/session information are rendered. Its interactions do not call workout or authentication APIs, and its appearance preference uses a separate browser-storage namespace. Switching styles does not change the main application's appearance or saved workouts. The component board includes logging, supersets/circuits, timers, library/history, editor forms, dialogs, account previews, and error/empty/sync states.
+Visit `/design` for a standalone component lab with ten styles selected from the dropdown at the top. The lab uses synthetic examples only and is publicly viewable; no personal records or account/session information are rendered. Its interactions do not call workout or authentication APIs, and its appearance preference uses a separate browser-storage namespace. Switching styles does not change the main application's appearance or saved workouts. The component board includes logging, supersets/circuits, timers, library/history, editor forms, dialogs, account previews, and error/empty/sync states.
 
 ## Development and verification
 

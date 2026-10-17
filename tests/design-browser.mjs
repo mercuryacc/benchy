@@ -25,7 +25,7 @@ try{
  await page.addInitScript(()=>{if(!localStorage.getItem('benchy.outbox'))localStorage.setItem('benchy.outbox','[{"fixture":"preserve"}]');if(!localStorage.getItem('benchy.theme'))localStorage.setItem('benchy.theme','light');});
  const response=await page.goto(origin+'/design',{waitUntil:'domcontentloaded'});assert.equal(response.status(),200,'separate design route must exist');
  assert.match(response.headers()['x-robots-tag'],/noindex/);assert.match(response.headers()['content-security-policy'],/script-src 'self'/);
- const styles=['carbon','chalk','signal','edition','afterhours'];
+ const styles=['carbon','chalk','signal','edition','afterhours','voltage','foundry','trackside','hardline','ember'];
  assert.deepEqual(await page.locator('#style-select option').evaluateAll(es=>es.map(e=>e.value)),styles);
  for(const section of ['session','library','history','editor','states','account'])assert.equal(await page.locator('#'+section).count(),1,'component section '+section);
  const signatures=new Set();
@@ -44,7 +44,7 @@ try{
    if(process.env.BENCHY_DESIGN_SCREENSHOTS&&width!==360){const dir=process.env.BENCHY_DESIGN_SCREENSHOTS;await fs.mkdir(dir,{recursive:true});await page.screenshot({path:path.join(dir,`${style}-${width}.png`),fullPage:true});}
   }
  }
- assert.equal(signatures.size,5,'styles must differ in geometry/typography, not just colours');
+ assert.equal(signatures.size,styles.length,'styles must differ in geometry/typography, not just colours');
  await page.locator('[data-action=reset]').click();
  const row=page.locator('[data-set][data-status=pending]').first();const setId=await row.getAttribute('data-set');const set=page.locator(`[data-set="${setId}"]`);
  await set.locator('[data-action=copy]').click();assert.equal(await set.getAttribute('data-status'),'pending','copying never completes a set');assert.equal(await set.locator('[data-field=load]').inputValue(),'20');
@@ -76,14 +76,14 @@ try{
  for(const action of ['login','setup']){await page.locator(`[data-action=${action}]`).click();assert.ok(await page.locator('#demo-dialog').isVisible());await page.locator('[data-action=mock-auth]').click();}
  await page.locator('[data-action=conflict]').click();await page.locator('[data-action=resolve-conflict]').first().click();
  await page.locator('[data-action=finish]').click();assert.ok(await page.locator('#demo-dialog').isVisible());await page.locator('[data-action=confirm-finish]').click();assert.match(await page.locator('.session-section .eyebrow').first().innerText(),/Finished example/i);
- await page.locator('[data-action=reset]').click();assert.equal(await page.locator('[data-set]').count(),3);assert.equal(await page.locator('[data-workout]').count(),2);assert.equal(await page.locator('#timer-state').innerText(),'Ready');assert.equal(await page.locator('html').getAttribute('data-style'),'afterhours');
- console.log('PASS demo interactions: copy without completion, zero load, complete/undo/skip/add, timer lifecycle, invalid RPE, inputs preserved across styles, search/duplicate/create, date-notes modal, all five settings sheets, synthetic export/import, mock passkeys, conflict/finish/reset; no real app writes.');
- await page.reload({waitUntil:'domcontentloaded'});assert.equal(await page.locator('html').getAttribute('data-style'),'afterhours');
+ await page.locator('[data-action=reset]').click();assert.equal(await page.locator('[data-set]').count(),3);assert.equal(await page.locator('[data-workout]').count(),2);assert.equal(await page.locator('#timer-state').innerText(),'Ready');assert.equal(await page.locator('html').getAttribute('data-style'),styles.at(-1));
+ console.log('PASS demo interactions: copy without completion, zero load, complete/undo/skip/add, timer lifecycle, invalid RPE, inputs preserved across styles, search/duplicate/create, date-notes modal, all ten settings sheets, synthetic export/import, mock passkeys, conflict/finish/reset; no real app writes.');
+ await page.reload({waitUntil:'domcontentloaded'});assert.equal(await page.locator('html').getAttribute('data-style'),styles.at(-1));
  assert.equal((await fetch(origin+'/api/state')).status,401,'main workout data stays private');
  assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
  assert.ok(requests.every(r=>r.method==='GET'&&!/^\/(api|auth)(\/|$)/.test(r.path)),'demo must never access workout or auth APIs');
  assert.deepEqual(await fs.readFile(path.join(data,'state.json')),baseline,'demo interactions may not mutate server state');
- console.log('PASS design lab: five distinct styles, six component sections, 15 responsive combinations, choice persists, real-app local storage untouched, strict CSP, no errors or API writes; private server state unchanged.');
+ console.log('PASS design lab: ten distinct styles, six component sections, 30 responsive combinations, choice persists, real-app local storage untouched, strict CSP, no errors or API writes; private server state unchanged.');
 }finally{
  await browser?.close();child.kill('SIGTERM');await Promise.race([new Promise(resolve=>child.once('exit',resolve)),delay(1500)]);await fs.rm(data,{recursive:true,force:true});
 }

@@ -9,7 +9,12 @@ const directions = {
  chalk:['Chalk / 02','Hard corners. Offset keylines. A warm, blunt editorial rhythm.'],
  signal:['Signal / 03','Instrument-like clarity. Cool surfaces and exact, monospaced details.'],
  edition:['Edition / 04','An open training journal. Oxblood ink, fine rules, and a little italic.'],
- afterhours:['Afterhours / 05','Athletic type. Bone on black. Softer controls with room to breathe.']
+ afterhours:['Afterhours / 05','Athletic type. Bone on black. Softer controls with room to breathe.'],
+ voltage:['Voltage / 06','Carbon turned up. Acid-filled exercise headers, cut corners and blunt, bold type.'],
+ foundry:['Foundry / 07','Built like equipment. Graphite, warm amber, mechanical labels and tactile controls.'],
+ trackside:['Trackside / 08','A faster rhythm. Race-poster type, orange-red actions and crisp starting-line rules.'],
+ hardline:['Hardline / 09','No camouflage. Black and bone, heavy keylines and uncompromising monochrome contrast.'],
+ ember:['Ember / 10','Warm force. Burnt-black surfaces, copper-orange actions and open, italic typography.']
 };
 function setStyle(value) {
  const style = Object.hasOwn(directions,value) ? value : 'carbon';
